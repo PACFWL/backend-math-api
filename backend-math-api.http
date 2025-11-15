@@ -1,0 +1,71 @@
+
+
+```http
+@host = http://localhost:5000
+@json = application/json
+# Substitua por um SectorId real após criar um setor:
+@sectorId = 6916902b183cb76df1de0f84
+
+### 🌐 Teste básico do servidor
+GET {{host}}/
+Accept: text/plain
+
+### 🏓 Ping (caso você tenha criado um endpoint raiz opcional)
+GET {{host}}/ping
+Accept: text/plain
+
+
+###
+
+############################################################
+# 📁 SECTOR CONTROLLER
+############################################################
+
+### 📦 Listar todos os setores
+GET {{host}}/api/sector
+Accept: {{json}}
+
+### ➕ Criar um novo setor (CORRETO)
+# OBS: No seu backend, SectorCreateDTO só tem Name e Description.
+POST {{host}}/api/sector
+Content-Type: {{json}}
+
+{
+  "name": "Álgebra",
+  "description": "Estudo de expressões e equações."
+}
+
+### 📋 Buscar setor por ID
+GET {{host}}/api/sector/{{sectorId}}
+Accept: {{json}}
+
+
+############################################################
+# 📘 TOPIC CONTROLLER
+############################################################
+
+### 📚 Listar todos os tópicos de um setor
+GET {{host}}/api/topic/{{sectorId}}
+Accept: {{json}}
+
+### ➕ Adicionar um tópico em um setor
+# TopicCreateDTO aceita Title, Content, Examples, MathRepresentation, VideoUrl e Subtopics
+POST {{host}}/api/topic/{{sectorId}}
+Content-Type: {{json}}
+
+{
+  "title": "Equações do 1º Grau",
+  "content": "Equações da forma ax + b = 0.",
+  "examples": [
+    "2x + 4 = 0 → x = -2",
+    "3x - 9 = 0 → x = 3"
+  ],
+  "mathRepresentation": "ax + b = 0",
+  "videoUrl": "https://www.youtube.com/watch?v=abc123",
+  "subtopics": [
+    {
+      "title": "Isolamento da incógnita",
+      "content": "Mover os termos para isolar x."
+    }
+  ]
+}

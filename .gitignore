@@ -1,0 +1,28 @@
+# Build
+bin/
+obj/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Backup
+*.bak
+
+# Publish output
+publish/
