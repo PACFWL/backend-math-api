@@ -22,5 +22,11 @@ namespace backend_math_api.Mappers
                 Name = model.Name,
                 Description = model.Description
             };
+
+        public static void UpdateModel(Sector model, SectorUpdateDTO dto)
+            {
+                model.Name = dto.Name;
+                model.Description = dto.Description;
+            }
     }
 }

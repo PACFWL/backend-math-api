@@ -4,7 +4,7 @@
 @host = http://localhost:5000
 @json = application/json
 # Substitua por um SectorId real após criar um setor:
-@sectorId = 6916902b183cb76df1de0f84
+@sectorId = 691a753f80559a70840e2c85
 
 ### 🌐 Teste básico do servidor
 GET {{host}}/
@@ -29,7 +29,7 @@ POST {{host}}/api/sector
 Content-Type: {{json}}
 
 {
-  "name": "Álgebra",
+  "name": "Teste 1",
   "description": "Estudo de expressões e equações."
 }
 
@@ -38,32 +38,49 @@ GET {{host}}/api/sector/{{sectorId}}
 Accept: {{json}}
 
 
+### ✏️ Editar (atualizar) um setor existente
+PUT {{host}}/api/sector/{{sectorId}}
+Content-Type: {{json}}
+
+{
+  "name": "Teste 1 Atualizado",
+  "description": "Descrição atualizada do setor."
+}
+
+### 📋 Deletar setor por ID
+DELETE {{host}}/api/sector/{{sectorId}}
+Accept: {{json}}
+
+
 ############################################################
 # 📘 TOPIC CONTROLLER
 ############################################################
 
 ### 📚 Listar todos os tópicos de um setor
-GET {{host}}/api/topic/{{sectorId}}
+//GET {{host}}/api/topic/{{sectorId}}
+GET {{host}}/api/sectors/{{sectorId}}/topics
 Accept: {{json}}
 
+
 ### ➕ Adicionar um tópico em um setor
-# TopicCreateDTO aceita Title, Content, Examples, MathRepresentation, VideoUrl e Subtopics
-POST {{host}}/api/topic/{{sectorId}}
+POST {{host}}/api/sectors/{{sectorId}}/topics
 Content-Type: {{json}}
 
 {
-  "title": "Equações do 1º Grau",
-  "content": "Equações da forma ax + b = 0.",
-  "examples": [
-    "2x + 4 = 0 → x = -2",
-    "3x - 9 = 0 → x = 3"
-  ],
-  "mathRepresentation": "ax + b = 0",
-  "videoUrl": "https://www.youtube.com/watch?v=abc123",
+  "title": "Testando",
+  "content": "Definição e exemplos.",
+  "examples": ["2x³ + 2x² + 7x + 10= 0"],
+  "mathRepresentation": "ax³ + bx² + cx + d = 0",
+  "videoUrl": null,
   "subtopics": [
-    {
-      "title": "Isolamento da incógnita",
-      "content": "Mover os termos para isolar x."
-    }
+    { "title": "Isolamento de variável", "content": "Explicação" }
   ]
+}
+
+###
+GET {{host}}/api/sectors/{{sectorId}}/topics
+Content-Type: {{json}}
+
+{
+ "title": "Testando"
 }

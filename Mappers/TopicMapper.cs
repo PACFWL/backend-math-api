@@ -4,7 +4,7 @@ using backend_math_api.DTOs;
 public static class TopicMapper
 {
     public static Topic ToModel(TopicCreateDTO dto) =>
-        new()
+        new Topic
         {
             Title = dto.Title,
             Content = dto.Content,
@@ -18,8 +18,22 @@ public static class TopicMapper
             }).ToList()
         };
 
+    public static void UpdateModel(Topic model, TopicUpdateDTO dto)
+    {
+        model.Title = dto.Title;
+        model.Content = dto.Content;
+        model.Examples = dto.Examples;
+        model.MathRepresentation = dto.MathRepresentation;
+        model.VideoUrl = dto.VideoUrl;
+        model.Subtopics = dto.Subtopics.Select(s => new Subtopic
+        {
+            Title = s.Title,
+            Content = s.Content
+        }).ToList();
+    }
+
     public static TopicDTO ToDTO(Topic model) =>
-        new()
+        new TopicDTO
         {
             Title = model.Title,
             Content = model.Content,

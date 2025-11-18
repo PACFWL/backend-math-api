@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-namespace backend_math_api.Models
 
+namespace backend_math_api.Models
 {
     public class Sector
     {

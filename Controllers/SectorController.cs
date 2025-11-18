@@ -7,7 +7,7 @@ using backend_math_api.Mappers;
 namespace backend_math_api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/sector")]
     public class SectorController : ControllerBase
     {
         private readonly SectorService _sectorService;
@@ -39,6 +39,30 @@ namespace backend_math_api.Controllers
             var sectorDto = SectorMapper.ToDTO(sector);
 
             return CreatedAtAction(nameof(GetById), new { id = sector.Id }, sectorDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, SectorUpdateDTO dto)
+        {
+            var sector = await _sectorService.GetByIdAsync(id);
+            if (sector is null) return NotFound();
+
+            SectorMapper.UpdateModel(sector, dto);
+
+            await _sectorService.UpdateAsync(id, sector);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var existing = await _sectorService.GetByIdAsync(id);
+            if (existing is null) return NotFound();
+
+            await _sectorService.DeleteAsync(id);
+
+            return NoContent();
         }
 
     }  
