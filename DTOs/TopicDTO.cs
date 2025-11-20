@@ -2,6 +2,7 @@ namespace backend_math_api.DTOs
 {
     public class TopicDTO
     {
+        public string Id { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
         public List<string> Examples { get; set; } = new();

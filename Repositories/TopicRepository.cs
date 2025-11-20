@@ -20,10 +20,10 @@ namespace backend_math_api.Repositories
             return sector?.Topics ?? new List<Topic>();
         }
 
-        public async Task<Topic?> GetTopicByIdAsync(string sectorId, string topicTitle)
+        public async Task<Topic?> GetTopicByIdAsync(string sectorId, string topicId)
         {
             var sector = await _sectors.Find(s => s.Id == sectorId).FirstOrDefaultAsync();
-            return sector?.Topics.FirstOrDefault(t => t.Title == topicTitle);
+            return sector?.Topics.FirstOrDefault(t => t.Id == topicId);
         }
 
         public async Task AddTopicAsync(string sectorId, Topic topic)
@@ -32,11 +32,11 @@ namespace backend_math_api.Repositories
             await _sectors.UpdateOneAsync(s => s.Id == sectorId, update);
         }
 
-        public async Task UpdateTopicAsync(string sectorId, string oldTitle, Topic updatedTopic)
+        public async Task UpdateTopicAsync(string sectorId, string topicId, Topic updatedTopic)
         {
             var filter = Builders<Sector>.Filter.And(
                 Builders<Sector>.Filter.Eq(s => s.Id, sectorId),
-                Builders<Sector>.Filter.Eq("Topics.Title", oldTitle)
+                Builders<Sector>.Filter.Eq("Topics.Id", topicId)
             );
 
             var update = Builders<Sector>.Update.Set("Topics.$", updatedTopic);
@@ -44,11 +44,11 @@ namespace backend_math_api.Repositories
             await _sectors.UpdateOneAsync(filter, update);
         }
 
-        public async Task DeleteTopicAsync(string sectorId, string topicTitle)
+        public async Task DeleteTopicAsync(string sectorId, string topicId)
         {
             var update = Builders<Sector>.Update.PullFilter(
                 s => s.Topics,
-                t => t.Title == topicTitle
+                t => t.Id == topicId
             );
 
             await _sectors.UpdateOneAsync(s => s.Id == sectorId, update);

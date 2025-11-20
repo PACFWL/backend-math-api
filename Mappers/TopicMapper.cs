@@ -1,11 +1,14 @@
 using backend_math_api.Models;
 using backend_math_api.DTOs;
 
+namespace backend_math_api.Mappers
+{
 public static class TopicMapper
 {
     public static Topic ToModel(TopicCreateDTO dto) =>
         new Topic
         {
+            Id = Guid.NewGuid().ToString(),
             Title = dto.Title,
             Content = dto.Content,
             Examples = dto.Examples,
@@ -35,6 +38,7 @@ public static class TopicMapper
     public static TopicDTO ToDTO(Topic model) =>
         new TopicDTO
         {
+            Id = model.Id,
             Title = model.Title,
             Content = model.Content,
             Examples = model.Examples,
@@ -46,4 +50,5 @@ public static class TopicMapper
                 Content = s.Content
             }).ToList()
         };
+}
 }

@@ -78,9 +78,86 @@ Content-Type: {{json}}
 }
 
 ###
-GET {{host}}/api/sectors/{{sectorId}}/topics
+GET {{host}}/api/sectors/{{sectorId}}/topics/
 Content-Type: {{json}}
 
 {
  "title": "Testando"
 }
+
+
+###
+POST http://localhost:5000/api/sector
+Content-Type: application/json
+
+{
+  "name": "Álgebra 2",
+  "description": "Setor dedicado a tópicos de álgebra."
+}
+
+
+###
+PUT http://localhost:5000/api/sector/691f5d9f2d210cb9ccca0a26
+Content-Type: application/json
+
+{
+  "name": "Álgebra Atualizada",
+  "description": "Descrição revisada."
+}
+
+
+###
+DELETE http://localhost:5000/api/sector/691f5d9f2d210cb9ccca0a26
+
+
+###
+GET http://localhost:5000/api/sectors/691f5e382d210cb9ccca0a27/topics
+
+
+###
+POST http://localhost:5000/api/sectors/691f5e382d210cb9ccca0a27/topics
+Content-Type: application/json
+
+{
+  "title": "Equações do 5º Grau",
+  "content": "Conteúdo explicando equações do primeiro grau.",
+  "examples": ["2x + 3 = 7", "5x = 10"],
+  "mathRepresentation": "ax + b = c",
+  "videoUrl": "https://youtube.com/example",
+  "subtopics": [
+    {
+      "title": "Isolando Variáveis",
+      "content": "Explicação sobre como isolar variáveis."
+    },
+    {
+      "title": "Resolvendo Equações",
+      "content": "Processo passo a passo."
+    }
+  ]
+}
+
+
+###
+GET http://localhost:5000/api/sectors/691f5e382d210cb9ccca0a27/topics/56be3b28-62bd-4efb-b06a-91c5510a51c6
+
+
+###
+PUT http://localhost:5000/api/sectors/691f5e382d210cb9ccca0a27/topics/56be3b28-62bd-4efb-b06a-91c5510a51c6
+Content-Type: application/json
+
+{
+  "title": "Equações do 1º Grau — Atualizado",
+  "content": "Novo conteúdo atualizado.",
+  "examples": ["3x + 2 = 11"],
+  "mathRepresentation": "ax + b = c",
+  "videoUrl": null,
+  "subtopics": [
+      {
+        "title": "Novo Subtópico",
+        "content": "Conteúdo atualizado."
+      }
+  ]
+}
+
+###
+DELETE http://localhost:5000/api/sectors/691f5e382d210cb9ccca0a27/topics/56be3b28-62bd-4efb-b06a-91c5510a51c6

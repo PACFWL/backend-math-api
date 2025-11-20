@@ -7,7 +7,7 @@ namespace backend_math_api.Repositories
     public class SectorRepository : ISectorRepository
     {
         private readonly IMongoCollection<Sector> _sectors;
-
+        
         public SectorRepository(IConfiguration config)
         {
             var client = new MongoClient(config["DatabaseSettings:ConnectionString"]);
